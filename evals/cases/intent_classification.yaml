@@ -1,0 +1,27 @@
+name: intent_classification
+description: Test that the intent classifier correctly categorizes messages
+
+cases:
+  - input: "Hello KIRA"
+    expected: "greeting"
+
+  - input: "What's the capital of France?"
+    expected: "question"
+
+  - input: "Open VS Code for me"
+    expected: "command"
+
+  - input: "Yeah I think that's a good approach, let's go with React"
+    expected: "conversation"
+
+  - input: "What did I say about the project deadline?"
+    expected: "memory_query"
+
+  - input: "What models do you use?"
+    expected: "meta"
+
+  - input: "Can you remember that I prefer dark mode?"
+    expected: "command"
+
+  - input: "Do you remember my meeting schedule?"
+    expected: "memory_query"

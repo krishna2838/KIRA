@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Vite
+node_modules/
+packages/client/dist/
+.vite/
+
+# Tauri / Rust
+src-tauri/target/
+src-tauri/Cargo.lock
+
+# Env
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# KIRA runtime
+~/.kira/
+data/
+logs/
+*.log

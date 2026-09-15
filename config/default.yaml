@@ -1,0 +1,197 @@
+kira:
+  name: "KIRA"
+  version: "0.1.0"
+
+models:
+  fast:
+    provider: "ollama"
+    model: "gemma4:e2b"
+    temperature: 0.3
+    timeout_sec: 10
+
+  smart:
+    provider: "ollama"
+    model: "gemma3:8b"
+    temperature: 0.7
+    timeout_sec: 60
+    fallback_to_cloud: true
+
+  cloud:
+    provider: "gemini"
+    model: "gemini-2.0-flash"
+    api_key: "${GEMINI_API_KEY}"
+    temperature: 0.7
+    timeout_sec: 120
+
+  vision:
+    provider: "gemini"
+    model: "gemini-2.0-flash"
+    api_key: "${GEMINI_API_KEY}"
+    timeout_sec: 30
+
+  embeddings:
+    provider: "ollama"
+    model: "nomic-embed-text"
+
+database:
+  postgres:
+    host: "localhost"
+    port: 5432
+    database: "kira"
+    user: "kira"
+    password: "${POSTGRES_PASSWORD}"
+  redis:
+    host: "localhost"
+    port: 6379
+
+server:
+  host: "0.0.0.0"
+  port: 8750
+  network_mode: "home"
+  cors_origins:
+    - "http://localhost:5173"
+    - "tauri://localhost"
+    - "http://localhost:8750"
+
+memory:
+  auto_summarize_threshold: 20
+  retrieval_limit: 10
+  similarity_threshold: 0.7
+
+redaction:
+  enabled: true
+  patterns:
+    - type: "email"
+    - type: "api_key"
+    - type: "password"
+    - type: "credit_card"
+    - type: "ssn"
+    - type: "phone"
+    - type: "ip_address"
+    - type: "jwt_token"
+    - type: "private_key"
+
+permissions:
+  auto_approve_level: 1
+  require_confirm_level: 2
+  # Per-tool overrides. Keys are qualified names ("<server>.<tool>").
+  # mode: default | allow | deny
+  # rate_limit_per_min: optional integer
+  # risk_override: 0..4 (READ..CRITICAL)
+  tool_overrides:
+    web.web_search:
+      rate_limit_per_min: 20
+    web.news_search:
+      rate_limit_per_min: 20
+    web.image_search:
+      rate_limit_per_min: 20
+    research.web_search:
+      rate_limit_per_min: 30
+    research.news_search:
+      rate_limit_per_min: 30
+    research.image_search:
+      rate_limit_per_min: 30
+    research.video_search:
+      rate_limit_per_min: 30
+    research.wikipedia:
+      rate_limit_per_min: 60
+    research.read_url:
+      rate_limit_per_min: 30
+    research.research:
+      rate_limit_per_min: 15
+    research.deep_research:
+      rate_limit_per_min: 6
+    # Computer — bump the destructive ones to CRITICAL.
+    # (permanent=true delete should always confirm regardless of level.)
+    computer.close_app:
+      risk_override: 2
+    computer.move_file:
+      risk_override: 2
+    computer.delete_file:
+      risk_override: 4
+    computer.set_volume:
+      rate_limit_per_min: 30
+    computer.toggle_dark_mode:
+      rate_limit_per_min: 10
+    computer.take_screenshot:
+      rate_limit_per_min: 30
+    computer.analyze_screenshot:
+      rate_limit_per_min: 15
+    # Browser — clicks and form fills need confirmation.
+    browser.click_element:
+      risk_override: 2
+    browser.fill_form:
+      risk_override: 2
+
+integrations:
+  # Optional Telegram — leave blank to disable.
+  telegram:
+    bot_token: "${TELEGRAM_BOT_TOKEN}"
+    allowed_chat_ids: []
+  # Optional Discord — leave blank to disable.
+  discord:
+    bot_token: "${DISCORD_BOT_TOKEN}"
+
+monitor:
+  # Proactive check interval, seconds.
+  check_interval_sec: 300
+  # Only surface proactive events with score >= this. Score is
+  # urgency × relevance × actionability. Raise to make KIRA quieter.
+  proactive_min_score: 0.6
+  proactive_batch_window_sec: 30
+
+personality:
+  formality: "balanced"   # casual | balanced | formal
+  verbosity: "normal"     # terse | normal | detailed
+  opinions: true
+
+documents:
+  enabled: true
+  # Directories KIRA watches + auto-indexes on startup.
+  watched_directories:
+    - "~/Documents"
+    - "~/Desktop"
+    - "~/Downloads"
+  auto_index_on_startup: true
+  max_file_mb: 40
+  chunk_tokens: 500
+  overlap_tokens: 50
+  parallelism: 2
+
+voice:
+  enabled: true
+  wake_word_enabled: true
+  wake_word_models:
+    - hey_jarvis      # openWakeWord default; drop a custom "hey_kira.onnx" here
+  wake_word_threshold: 0.5
+  whisper_model: "small.en"
+  whisper_device: "auto"
+  whisper_compute_type: "int8"
+  # Piper voice ONNX path. Grab e.g. en_US-lessac-medium.onnx from
+  # https://huggingface.co/rhasspy/piper-voices — leave blank to disable TTS.
+  piper_voice_path: ""
+  input_device: null   # null = system default
+  output_device: null
+
+tools:
+  enabled_builtins:
+    - filesystem
+    - terminal
+    - web
+    - research
+    - browser
+    - computer
+    - google
+    - notifications
+    - life
+    - code
+    - documents
+  # External MCP servers to connect at startup.
+  # Each entry: {name, transport: stdio|sse, command?, args?, env?, url?}
+  external: []
+  relevance_top_k: 6
+
+logging:
+  level: "INFO"
+  format: "json"
+  file: "~/.kira/logs/kira.log"

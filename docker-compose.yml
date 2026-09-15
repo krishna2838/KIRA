@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: kira
+      POSTGRES_USER: kira
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kira_dev_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - kira_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - kira_redis:/data
+
+volumes:
+  kira_pgdata:
+  kira_redis:

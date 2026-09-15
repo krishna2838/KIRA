@@ -1,0 +1,18 @@
+name: model_routing
+description: Test that the model router picks the right tier
+
+cases:
+  - input: "Hi"
+    expected_tier: "fast"
+
+  - input: "What time is it?"
+    expected_tier: "fast"
+
+  - input: "Explain how transformers work in machine learning"
+    expected_tier: "smart"
+
+  - input: "Review this 200-line Python file and suggest improvements"
+    expected_tier: "smart"
+
+  - input: "Research the top 10 AI frameworks in 2026 with pros and cons"
+    expected_tier: "cloud"

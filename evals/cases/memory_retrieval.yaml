@@ -1,0 +1,23 @@
+name: memory_retrieval
+description: Ensure semantic search returns the seeded memory for related queries
+
+seed_memories:
+  - content: "Krishna prefers dark mode in all his editors."
+    category: "preference"
+    importance: 0.7
+  - content: "Krishna is working on KIRA, a personal AI operating system."
+    category: "fact"
+    importance: 0.9
+  - content: "Krishna's MacBook Air M4 has 16GB of RAM."
+    category: "fact"
+    importance: 0.4
+
+cases:
+  - query: "what UI theme does he like?"
+    expect_content_substring: "dark mode"
+
+  - query: "what project is he building?"
+    expect_content_substring: "KIRA"
+
+  - query: "how much memory on the laptop?"
+    expect_content_substring: "16GB"

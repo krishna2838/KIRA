@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from kira.brain.router import ModelRouter
-from kira.types import ModelTier
+from kira.core.types import ModelTier
 
 
 class FakeOllama:

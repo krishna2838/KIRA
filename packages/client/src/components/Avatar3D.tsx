@@ -220,7 +220,7 @@ function Particles({
     return out;
   }, [count]);
 
-  useFrame((_, delta) => {
+  useFrame(() => {
     const inst = meshRef.current;
     if (!inst) return;
     const p = targetProfile.current;

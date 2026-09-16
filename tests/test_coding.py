@@ -11,9 +11,9 @@ from kira.brain.planner import (
     _extract_json_array,
     _resolve_refs,
 )
-from kira.permissions import PermissionEngine
+from kira.core.permissions import PermissionEngine
 from kira.tools.coding import analyze, build, edit
-from kira.types import RiskLevel
+from kira.core.types import RiskLevel
 
 
 # ---- edit --------------------------------------------------------------

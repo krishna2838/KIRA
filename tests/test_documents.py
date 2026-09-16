@@ -1,8 +1,8 @@
 """Tests for document pipeline pieces that don't need external libs."""
-from kira.permissions import PermissionEngine
+from kira.core.permissions import PermissionEngine
 from kira.tools.documents.chunker import chunk_pages
 from kira.tools.documents.parsers import detect_kind
-from kira.types import RiskLevel
+from kira.core.types import RiskLevel
 
 
 # ---- chunker -----------------------------------------------------------

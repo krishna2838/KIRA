@@ -1,4 +1,4 @@
-from kira.config import get_config, reload_config
+from kira.core.config import get_config, reload_config
 
 
 def test_config_loads_defaults():

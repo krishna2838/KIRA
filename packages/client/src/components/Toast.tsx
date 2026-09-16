@@ -22,7 +22,7 @@ export const useToasts = create<ToastStore>((set) => ({
     set((s) => ({
       items: [
         ...s.items,
-        { id: t.id ?? crypto.randomUUID(), timeoutMs: 4000, ...t },
+        { ...t, id: t.id ?? crypto.randomUUID() },
       ].slice(-6),
     })),
   dismiss: (id) => set((s) => ({ items: s.items.filter((x) => x.id !== id) })),

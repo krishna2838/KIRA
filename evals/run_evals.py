@@ -10,7 +10,7 @@ import yaml
 from kira.brain.intent import IntentClassifier
 from kira.brain.ollama_client import OllamaClient
 from kira.brain.router import ModelRouter
-from kira.config import get_config
+from kira.core.config import get_config
 
 
 async def run_intent_cases(cases_file: Path) -> tuple[int, int]:

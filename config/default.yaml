@@ -11,7 +11,7 @@ models:
 
   smart:
     provider: "ollama"
-    model: "gemma3:8b"
+    model: "qwen3:30b-a3b"
     temperature: 0.7
     timeout_sec: 60
     fallback_to_cloud: true
@@ -169,7 +169,8 @@ voice:
   whisper_compute_type: "int8"
   # Piper voice ONNX path. Grab e.g. en_US-lessac-medium.onnx from
   # https://huggingface.co/rhasspy/piper-voices — leave blank to disable TTS.
-  piper_voice_path: ""
+  # setup.sh downloads this voice to ~/.kira/piper/ automatically.
+  piper_voice_path: "~/.kira/piper/en_US-lessac-medium.onnx"
   input_device: null   # null = system default
   output_device: null
 

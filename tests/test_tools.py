@@ -3,8 +3,8 @@ import asyncio
 
 import pytest
 
-from kira.permissions import PermissionEngine, ToolPermission
-from kira.types import RiskLevel
+from kira.core.permissions import PermissionEngine, ToolPermission
+from kira.core.types import RiskLevel
 
 from kira.tools.executor import ToolExecutor
 from kira.tools.registry import ToolRegistry

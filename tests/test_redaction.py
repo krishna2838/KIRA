@@ -1,4 +1,4 @@
-from kira.redaction import redact
+from kira.core.redaction import redact
 
 
 def test_email():

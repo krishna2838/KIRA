@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Prism from "prismjs";
-// Common languages — Prism auto-lazy-loads, but eagerly loading these keeps
-// the first render synchronous.
-import "prismjs/components/prism-python";
+// Common languages — order MATTERS: a grammar that extends another must be
+// imported AFTER its base (tsx extends jsx + typescript; jsx extends
+// markup+javascript which are in Prism core). Wrong order throws
+// "Cannot set properties of undefined (setting 'comment')" and blanks the app.
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-python";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-json";
 import "prismjs/components/prism-yaml";

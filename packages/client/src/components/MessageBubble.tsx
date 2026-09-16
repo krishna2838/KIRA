@@ -87,10 +87,10 @@ export function MessageBubble({ msg }: { msg: Message }) {
             {Array.isArray(msg.metadata?.source_tags) && (
               <SourceTags tags={msg.metadata!.source_tags as string[]} />
             )}
-            {msg.metadata?.confidence && (
+            {Boolean(msg.metadata?.confidence) && (
               <ConfidenceBadge
-                confidence={(msg.metadata!.confidence as any).confidence}
-                reason={(msg.metadata!.confidence as any).reason}
+                confidence={(msg.metadata!.confidence as { confidence: number }).confidence}
+                reason={(msg.metadata!.confidence as { reason?: string }).reason}
               />
             )}
             <FactCheckButton claim={msg.content} />

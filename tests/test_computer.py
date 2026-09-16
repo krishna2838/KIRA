@@ -1,9 +1,9 @@
 """Tests for computer-control primitives + permissions of new tools."""
 import asyncio
 
-from kira.permissions import PermissionEngine, ToolPermission
+from kira.core.permissions import PermissionEngine, ToolPermission
 from kira.tools.computer.util import expand_path
-from kira.types import RiskLevel
+from kira.core.types import RiskLevel
 
 
 def test_expand_path_expands_tilde():

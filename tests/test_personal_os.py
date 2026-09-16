@@ -2,9 +2,9 @@
 import asyncio
 from datetime import datetime, timedelta, timezone
 
-from kira.permissions import PermissionEngine
+from kira.core.permissions import PermissionEngine
 from kira.tools.monitor import Monitor
-from kira.types import RiskLevel
+from kira.core.types import RiskLevel
 
 
 def test_permission_maps_google_reads_to_read():

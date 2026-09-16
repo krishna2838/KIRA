@@ -1,5 +1,5 @@
-from kira.permissions import PermissionEngine
-from kira.types import RiskLevel
+from kira.core.permissions import PermissionEngine
+from kira.core.types import RiskLevel
 
 
 def test_read_tools_are_read_level():

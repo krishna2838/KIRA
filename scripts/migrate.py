@@ -2,6 +2,15 @@
 from __future__ import annotations
 
 import asyncio
+import sys
+from pathlib import Path
+
+# Self-bootstrap: ensure the src-layout `kira` package is importable even
+# when this script is run directly (`python scripts/migrate.py`) without
+# PYTHONPATH set or the editable-install .pth being honored.
+_SRC = Path(__file__).resolve().parents[1] / "src"
+if _SRC.is_dir() and str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
 
 
 SCHEMA_SQL = """

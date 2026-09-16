@@ -1,0 +1,79 @@
+[project]
+name = "kira"
+version = "0.1.0"
+description = "KIRA — local-first, MCP-native, memory-centric personal AI OS."
+requires-python = ">=3.11"
+authors = [{ name = "Krishna Ghodke" }]
+dependencies = [
+    # core
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "keyring>=25.2",
+    # brain
+    "httpx>=0.27",
+    # memory
+    "asyncpg>=0.29",
+    "pgvector>=0.3",
+    "redis>=5.0",
+    # server
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "websockets>=13.0",
+    # tools — core
+    "mcp>=1.0",
+    "duckduckgo-search>=6.2",
+    "trafilatura>=1.12",
+    "beautifulsoup4>=4.12",
+    "wikipedia-api>=0.7",
+    # tools — browser + computer
+    "playwright>=1.47",
+    "Pillow>=10.4",
+    "pyobjc-framework-Cocoa>=10.3; sys_platform == 'darwin'",
+    "pyobjc-framework-ApplicationServices>=10.3; sys_platform == 'darwin'",
+    "pyobjc-framework-Quartz>=10.3; sys_platform == 'darwin'",
+    # tools — google / github / coding / docs
+    "google-auth-oauthlib>=1.2",
+    "google-api-python-client>=2.140",
+    "GitPython>=3.1",
+    "PyGithub>=2.4",
+    "rich>=13.7",
+    "PyMuPDF>=1.24",
+    "python-docx>=1.1",
+    "watchdog>=5.0",
+    "paddleocr>=2.7; sys_platform == 'darwin'",
+    # scheduling
+    "APScheduler>=3.10",
+    # voice
+    "numpy>=1.26",
+    "sounddevice>=0.5",
+    "faster-whisper>=1.0",
+    "openwakeword>=0.6",
+    "onnxruntime>=1.17",
+    "piper-tts>=1.2",
+    "silero-vad>=5.1",
+    # menu-bar app (macOS)
+    "rumps>=0.4; sys_platform == 'darwin'",
+    "pynput>=1.7; sys_platform == 'darwin'",
+]
+
+[project.scripts]
+kira = "kira.app:main"
+
+[project.optional-dependencies]
+messaging = ["python-telegram-bot>=21.0", "discord.py>=2.4"]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["kira*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

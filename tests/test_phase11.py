@@ -2,7 +2,7 @@
 import asyncio
 from pathlib import Path
 
-from kira.prompt_guard import (
+from kira.core.prompt_guard import (
     looks_like_injection,
     sanitize_user_input,
     wrap_tool_output,
@@ -49,7 +49,7 @@ def test_wrap_tool_output_labels_flag_when_injection_present():
 
 def test_secrets_roundtrip_fallback(tmp_path, monkeypatch):
     # Point the fallback file at a temp dir and disable keyring.
-    from kira import secrets
+    from kira.core import secrets
 
     monkeypatch.setattr(secrets, "_FALLBACK_PATH", tmp_path / "secrets.json")
     monkeypatch.setattr(secrets, "_keyring", lambda: None)

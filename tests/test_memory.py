@@ -1,6 +1,6 @@
 """Tests for memory helpers that don't need a live database."""
 from kira.memory.context import WorkingContext
-from kira.types import KiraState
+from kira.core.types import KiraState
 
 
 def test_working_context_default_state():

@@ -101,19 +101,6 @@ export function RichMessage({ msg }: { msg: Message }) {
   const diffs = events.filter((e) => e.diff).map((e) => e.diff!);
   const proposals = events.filter((e) => e.proposal).map((e) => e.proposal!);
 
-  const hasRich =
-    !!research ||
-    events.length > 0 ||
-    confirmation ||
-    researchMode ||
-    screenshots.length > 0 ||
-    appLists.length > 0 ||
-    fileLists.length > 0 ||
-    codeSnippets.length > 0 ||
-    diffs.length > 0 ||
-    proposals.length > 0 ||
-    docCitations.length > 0;
-
   return (
     <div className="flex w-full justify-start mb-4">
       <div className="max-w-[80%] w-full">
